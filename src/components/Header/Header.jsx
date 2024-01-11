@@ -2,7 +2,7 @@ import { useTelegram } from "../../hooks/useTelegram";
 import Button from "../Button/Button";
 
 const Header = () => {
-  const { handleClose, onToggleButton, user } = useTelegram();
+  const { handleClose, user } = useTelegram();
   return (
     <header>
       <Button onClick={handleClose}>Закрити</Button>
