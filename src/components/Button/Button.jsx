@@ -1,9 +1,7 @@
-import s from "./Button.module.css";
+import { ButtonStyled } from "./Button.styled";
 
 const Button = (props) => (
-  <button className={s.button} {...props}>
-    {props.children}
-  </button>
+  <ButtonStyled {...props}>{props.children}</ButtonStyled>
 );
 
 export default Button;
