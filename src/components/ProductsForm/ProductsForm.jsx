@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTelegram } from "./../../hooks/useTelegram";
 
-import Button from "./../Button/Button";
+// import Button from "./../Button/Button";
 import {
   FormStyled,
   ErrorStyled,
@@ -18,11 +18,13 @@ const ProductsForm = () => {
   } = useForm();
   const { tg } = useTelegram();
 
+  console.log("tg", tg);
+
   useEffect(() => {
     tg.MainButton.setParams({
       text: "Відправити дані",
     });
-  }, [tg.MainButton]);
+  }, [tg]);
 
   useEffect(() => {
     if (!Object.keys(errors).length) {
@@ -31,7 +33,7 @@ const ProductsForm = () => {
     } else {
       tg.MainButton.show();
     }
-  }, [errors, tg.MainButton]);
+  }, [errors, tg]);
 
   const onSubmit = (data) => console.log(data);
 
@@ -58,9 +60,9 @@ const ProductsForm = () => {
         />
         {errors.email && <ErrorStyled>This field is required</ErrorStyled>}
       </InputBoxStyled>
-      <Button type="submit" $variant="submit">
+      {/* <Button type="submit" $variant="submit">
         Відправити
-      </Button>
+      </Button> */}
     </FormStyled>
   );
 };
