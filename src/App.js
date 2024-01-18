@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useTelegram } from "./hooks/useTelegram";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Button from "./components/Button/Button";
-import Header from "./components/Header/Header";
+import ProductsForm from "./components/ProductsForm/ProductsForm";
+import SharedLayout from "./components/SharedLayout/SharedLayout";
+import ProductsList from "./components/ProductsList/ProductsList";
 
 function App() {
-  const { tg, onToggleButton } = useTelegram();
+  const { tg } = useTelegram();
 
   useEffect(() => {
     tg.ready();
@@ -13,8 +15,13 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <Button onClick={onToggleButton}>Toggle</Button>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<ProductsList />} />
+          <Route path="/form" element={<ProductsForm />} />
+        </Route>
+      </Routes>
+      {/* <Button onClick={onToggleButton}>Toggle</Button> */}
     </div>
   );
 }
