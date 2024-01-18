@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { useTelegram } from "./../../hooks/useTelegram";
 
 // import Button from "./../Button/Button";
@@ -15,10 +15,19 @@ const ProductsForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    control,
+  } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+    },
+  });
   const { tg } = useTelegram();
+  const isName = useWatch({ name: "name", control });
+  const isEmail = useWatch({ name: "email", control });
 
-  console.log("tg", tg);
+  console.log("isName", isName);
+  console.log("isEmail", isEmail);
 
   useEffect(() => {
     tg.MainButton.setParams({
@@ -27,13 +36,13 @@ const ProductsForm = () => {
   }, [tg]);
 
   useEffect(() => {
-    if (!Object.keys(errors).length) {
+    if (!isName || !isEmail) {
       console.log("пуст");
       tg.MainButton.hide();
     } else {
       tg.MainButton.show();
     }
-  }, [errors, tg]);
+  }, [isEmail, isName, tg]);
 
   const onSubmit = (data) => console.log(data);
 
