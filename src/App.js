@@ -7,7 +7,7 @@ import SharedLayout from "./components/SharedLayout/SharedLayout";
 import ProductsList from "./components/ProductsList/ProductsList";
 
 function App() {
-  const { tg } = useTelegram();
+  const { tg, onToggleButton } = useTelegram();
 
   useEffect(() => {
     tg.ready();
@@ -21,7 +21,7 @@ function App() {
           <Route path="/form" element={<ProductsForm />} />
         </Route>
       </Routes>
-      {/* <Button onClick={onToggleButton}>Toggle</Button> */}
+      <Button onClick={onToggleButton}>Toggle</Button>
     </div>
   );
 }
