@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useTelegram } from "./../../hooks/useTelegram";
 
@@ -29,6 +29,17 @@ const ProductsForm = () => {
   console.log("isName", isName);
   console.log("isEmail", isEmail);
 
+  const cb = useCallback(() => {
+    tg.sendData({ isName, isEmail });
+  }, [isEmail, isName, tg]);
+
+  useEffect(() => {
+    tg.WebApp.onEvent("mainButtonClicked", cb);
+    return () => {
+      tg.WebApp.offEvent("mainButtonClicked", cb);
+    };
+  }, [cb, tg]);
+
   useEffect(() => {
     tg.MainButton.setParams({
       text: "Відправити дані",
@@ -37,7 +48,7 @@ const ProductsForm = () => {
 
   useEffect(() => {
     if (!isName || !isEmail) {
-      console.log("пуст");
+      console.log("пустo");
       tg.MainButton.hide();
     } else {
       tg.MainButton.show();
