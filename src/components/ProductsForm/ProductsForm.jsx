@@ -30,14 +30,15 @@ const ProductsForm = () => {
   console.log("isEmail", isEmail);
 
   const cb = useCallback(() => {
-    const data = { isName, isEmail };
+    const data = { name: isName, email: isEmail };
+
     tg.sendData(JSON.stringify(data));
-  }, [isEmail, isName, tg]);
+  }, [tg, isEmail, isName]);
 
   useEffect(() => {
-    tg.WebApp.onEvent("mainButtonClicked", cb);
+    tg.WebApp?.onEvent("mainButtonClicked", cb);
     return () => {
-      tg.WebApp.offEvent("mainButtonClicked", cb);
+      tg.WebApp?.offEvent("mainButtonClicked", cb);
     };
   }, [cb, tg]);
 
