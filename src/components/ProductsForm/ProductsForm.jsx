@@ -30,7 +30,8 @@ const ProductsForm = () => {
   console.log("isEmail", isEmail);
 
   const cb = useCallback(() => {
-    tg.sendData({ isName, isEmail });
+    const data = { isName, isEmail };
+    tg.sendData(JSON.stringify(data));
   }, [isEmail, isName, tg]);
 
   useEffect(() => {
