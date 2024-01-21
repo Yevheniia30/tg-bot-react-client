@@ -1,6 +1,6 @@
 import { ButtonStyled } from "./Button.styled";
 
-const Button = (props) => (
+const Button = (props: any) => (
   <ButtonStyled {...props}>{props.children}</ButtonStyled>
 );
 
